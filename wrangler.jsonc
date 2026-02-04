@@ -1,0 +1,5 @@
+{
+  "name": "mcss",
+  "compatibility_date": "2026-02-04",
+  "main": "./src/index.ts" // 关键！指定 Worker 脚本入口文件，请根据你的实际路径修改
+}
