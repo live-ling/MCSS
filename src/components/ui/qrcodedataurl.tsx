@@ -12,6 +12,9 @@
  */
 
 import React, { useEffect, useState } from 'react';
+
+// 添加 qrcode 模块的类型声明
+// @ts-ignore
 import QRCode from 'qrcode';
 
 interface QRCodeDataUrlProps {

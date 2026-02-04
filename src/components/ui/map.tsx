@@ -128,9 +128,9 @@ const contextValue = useMemo<MapContextProps>(
 );
 
 const initMap = useCallback(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || !(window as any).BMapGL) return;
 
-    let map = currentRef.current;
+    let map = currentRef.current as any;
 
     if (!map) {
     // Create map instance

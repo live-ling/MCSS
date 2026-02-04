@@ -16,8 +16,6 @@ import type {
   UserStats,
   SmtpConfig,
   EmailTemplate,
-  VerificationCode,
-  ServerEditRequest,
   SiteSettings,
 } from '@/types';
 

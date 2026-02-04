@@ -17,7 +17,7 @@ const App: React.FC = () => {
             <IntersectObserver />
             <Routes>
               <Route element={<MainLayout />}>
-                {routes.map((route, index) => (
+                {routes.map((route: any, index: number) => (
                   <Route
                     key={index}
                     path={route.path}

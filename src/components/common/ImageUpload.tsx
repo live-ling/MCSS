@@ -1,7 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
@@ -27,10 +26,9 @@ export function ImageUpload({
   existingImages = [],
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress] = useState(0);
   const [images, setImages] = useState<string[]>(existingImages);
   const [showCropDialog, setShowCropDialog] = useState(false);
-  const [currentFile, setCurrentFile] = useState<File | null>(null);
   const [imgSrc, setImgSrc] = useState('');
   const [crop, setCrop] = useState<Crop>({
     unit: '%',
@@ -216,7 +214,6 @@ export function ImageUpload({
       // 关闭对话框并处理下一个文件
       setShowCropDialog(false);
       setImgSrc('');
-      setCurrentFile(null);
       
       // 如果还有待处理的文件，继续处理
       if (pendingFiles.length > 0) {
@@ -237,7 +234,6 @@ export function ImageUpload({
     const reader = new FileReader();
     reader.addEventListener('load', () => {
       setImgSrc(reader.result?.toString() || '');
-      setCurrentFile(file);
       setShowCropDialog(true);
       // 重置裁切区域
       setCrop({
@@ -357,7 +353,6 @@ export function ImageUpload({
         if (!open && !uploading) {
           setShowCropDialog(false);
           setImgSrc('');
-          setCurrentFile(null);
           setPendingFiles([]);
         }
       }}>
@@ -439,7 +434,7 @@ export function ImageUpload({
               onClick={() => {
                 setShowCropDialog(false);
                 setImgSrc('');
-                setCurrentFile(null);
+                // 清除文件选择
                 setPendingFiles([]);
               }}
               disabled={uploading}
