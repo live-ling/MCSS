@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import { miaodaDevPlugin } from "miaoda-sc-plugin";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import path from "path";
@@ -8,7 +7,6 @@ import path from "path";
 export default defineConfig({
   plugins: [
     react(),
-    miaodaDevPlugin(),
     svgr({
       svgrOptions: {
         icon: true,
@@ -20,6 +18,21 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+    minify: "esbuild",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          router: ["react-router", "react-router-dom"],
+          ui: ["@radix-ui/react-icons", "lucide-react"],
+          form: ["react-hook-form", "@hookform/resolvers", "zod"],
+        },
+      },
     },
   },
 });
